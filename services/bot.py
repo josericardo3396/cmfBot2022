@@ -16,7 +16,10 @@ class BotService:
     @classmethod
     async def reply_message(cls, chat_id: Union[str, int], text: str) -> Tuple:
         async with httpx.AsyncClient() as client:
+            print("Here")
             url = BotSettings.API_URL % Action.SEND_MESSAGE
+            print(url)
             response = await client.post(url=url, json={"chat_id": chat_id, "text": text})
+            print(response)
         return loads(response.content), response.status_code
 

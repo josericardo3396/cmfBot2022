@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, constr
-
+from typing import Optional
 
 class FromSchema(BaseModel):
     id: int = Field(..., title="ID del usuario")
@@ -12,7 +12,8 @@ class FromSchema(BaseModel):
 class ChatSchema(BaseModel):
     id: int = Field(..., title="ID del chat")
     first_name: constr(strict=True) = Field(..., title="Nombre del usuario")
-    username: constr(strict=True) = Field(..., title="Nombre de usuario")
+    username: Optional[str] = Field(None, title="Nombre de usuario")
+    #username: constr(strict=True) = Field(..., title="Nombre de usuario")
     type: constr(strict=True) = Field(..., title="Tipo de chat")
 
 
@@ -35,24 +36,16 @@ class TelegramMessageSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "update_id": 56918934,
                 "message": {
                     "message_id": 86,
                     "from": {
-                        "id": 1084783282,
                         "is_bot": False,
-                        "first_name": "faqn2",
-                        "username": "faQn2s",
                         "language_code": "es"
                     },
                     "chat": {
-                        "id": 1084783282,
-                        "first_name": "faqn2",
-                        "username": "faQn2s",
                         "type": "private"
                     },
-                    "date": 1641925988,
-                    "text": "Mensaje"
+                    "text": "."
                 }
             }
         }
